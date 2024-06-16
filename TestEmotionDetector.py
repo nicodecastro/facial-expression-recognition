@@ -7,14 +7,14 @@ emotion_dict = {0: "Angry", 1: "Disgusted", 2: "Fearful", 3: "Happy", 4: "Neutra
 
 
 # Load json and create model
-json_file = open('model/emotion_model.json', 'r')
+json_file = open('emotion_model.json', 'r')
 loaded_model_json = json_file.read()
 json_file.close()
 emotion_model = model_from_json(loaded_model_json)
 
 
 # Load weights into new model
-emotion_model.load_weights("model/emotion_model.h5")
+emotion_model.load_weights("emotion_model.weights.h5")
 print("Loaded model from disk")
 
 # Start the webcam feed
@@ -27,7 +27,7 @@ while True:
     frame = cv2.resize(frame, (1280, 720))
     if not ret:
         break
-    face_detector = cv2.CascadeClassifier('haarcascades/haarcascades_frontalface_default.xml')
+    face_detector = cv2.CascadeClassifier('haarcascades/haarcascade_frontalface_default.xml')
     gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
     # Detect faces available on camera
@@ -37,7 +37,7 @@ while True:
     for (x, y, w, h) in num_faces:
         cv2.rectangle(frame, (x, y-50), (x+w, y+h+10), (0, 255, 0), 4)
         roi_gray_frame = gray_frame[y:y + h, x:x + w]
-        cropped_img = np.expand_dims(np.expand_dims(cv2.resize(roi_gray_frame, (48, 48)), -1),)
+        cropped_img = np.expand_dims(np.expand_dims(cv2.resize(roi_gray_frame, (48, 48)), -1), 0)
 
         # Predict the emotions
         emotion_prediction = emotion_model.predict(cropped_img)
