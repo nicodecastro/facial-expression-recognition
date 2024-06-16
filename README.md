@@ -1,6 +1,6 @@
-# EmotionAI
+# Facial Expression Recognition
 
-This project aims to classify emotions from facial expressions using Python. The target emotions to be classified are happiness, sadness, anger, surprise, disgust, fear, and neutral.
+This project aims to classify emotions from facial expressions using Keras and OpenCV in Python. The target emotions to be classified are happiness, sadness, anger, surprise, disgust, fear, and neutral.
 
 ## Dataset
 
