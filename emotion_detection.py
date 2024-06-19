@@ -5,6 +5,7 @@ from keras.optimizers import Adam
 from tensorflow.keras.optimizers import Adam 
 from tensorflow.keras.utils import image_dataset_from_directory
 from tensorflow.keras.optimizers.schedules import ExponentialDecay 
+import matplotlib.pyplot as plt 
 
 # Data Preprocessing
 train_data = image_dataset_from_directory(
@@ -69,6 +70,32 @@ emotion_model_info = emotion_model.fit(
 
 # Accuracy and Loss Evaluation
 emotion_model.evaluate(normalized_validation_data)
+
+# Plots for Accuracy and Loss
+accuracy = emotion_model_info.history['accuracy'] 
+val_accuracy = emotion_model_info.history['val_accuracy'] 
+loss = emotion_model_info.history['loss'] 
+val_loss = emotion_model_info.history['val_loss']
+  
+# Accuracy graph 
+plt.subplot(1, 2, 1) 
+plt.plot(accuracy, label='accuracy') 
+plt.plot(val_accuracy, label='val accuracy') 
+plt.title('Accuracy Graph') 
+plt.xlabel('Epochs') 
+plt.ylabel('Accuracy') 
+plt.legend() 
+  
+# loss graph 
+plt.subplot(1, 2, 2) 
+plt.plot(loss, label='loss') 
+plt.plot(val_loss, label='val loss') 
+plt.title('Loss Graph') 
+plt.xlabel('Epochs') 
+plt.ylabel('Loss') 
+plt.legend() 
+  
+plt.show() 
 
 # Save model structure in json file
 model_json = emotion_model.to_json()
