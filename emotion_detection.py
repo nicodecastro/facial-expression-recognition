@@ -1,32 +1,32 @@
 # Import packages
 from keras.models import Sequential 
-from keras.layers import Conv2D, MaxPooling2D, Dense, Dropout, Flatten, Input
+from keras.layers import Conv2D, MaxPooling2D, Dense, Dropout, Flatten, Input, Rescaling
 from keras.optimizers import Adam 
 from tensorflow.keras.optimizers import Adam 
-from tensorflow.keras.preprocessing.image import ImageDataGenerator 
+from tensorflow.keras.utils import image_dataset_from_directory
 from tensorflow.keras.optimizers.schedules import ExponentialDecay 
 
 # Data Preprocessing
-train_data_gen = ImageDataGenerator(rescale=1./255) 
-validation_data_gen = ImageDataGenerator(rescale=1./255) 
-
-
-# Preprocess all test images
-train_generator = train_data_gen.flow_from_directory(
-    'data/train',
-    target_size=(48, 48),
+train_data = image_dataset_from_directory(
+    'data/train/',
     batch_size=64,
-    color_mode="grayscale",
-    class_mode='categorical'
+    image_size=(48, 48),
+    color_mode='grayscale',
+    label_mode='categorical'
 )
 
-validation_generator = validation_data_gen.flow_from_directory(
-    'data/test',
-    target_size=(48, 48),
+validation_data = image_dataset_from_directory(
+    'data/test/',
     batch_size=64,
-    color_mode="grayscale",
-    class_mode='categorical'
+    image_size=(48, 48),
+    color_mode='grayscale',
+    label_mode='categorical'
 )
+
+normalization_layer = Rescaling(1./255)
+
+normalized_train_data = train_data.map(lambda x, y: (normalization_layer(x), y))
+normalized_validation_data = validation_data.map(lambda x, y: (normalization_layer(x), y))
 
 
 # Create model structure
@@ -62,14 +62,13 @@ emotion_model.compile(loss='categorical_crossentropy', optimizer=optimizer, metr
 
 # Train the neutral network/model
 emotion_model_info = emotion_model.fit( 
-    train_generator, 
-    steps_per_epoch=28709 // 64, 
-    epochs=30, 
-    validation_data=validation_generator, 
-    validation_steps=7178 // 64
+    normalized_train_data, 
+    epochs=50, 
+    validation_data=normalized_validation_data, 
 )
 
-emotion_model.evaluate(validation_generator)
+# Accuracy and Loss Evaluation
+emotion_model.evaluate(normalized_validation_data)
 
 # Save model structure in json file
 model_json = emotion_model.to_json()
