@@ -86,7 +86,10 @@ deactivate
 
 This section lists resources that were helpful in the development of this project or provide further reading on the topic.
 
-* Emotion Detection using CNN | Emotion Detection Deep Learning project |Machine Learning | Data Magic http://www.youtube.com/watch?v=UHdrxHPRBng by Data Magic (by Sunny Kusawa) on Youtube  
-* Deep Learning for Computer Vision with Python and TensorFlow – Complete Course by freeCodeCamp.org on Youtube  
-* Build a Deep Face Detection Model with Python and Tensorflow | Full Course by Nicholas Renotte on Youtube  
-* Emotion Detection using Convolutional Neural Networks (CNNs) https://www.geeksforgeeks.org/emotion-detection-using-convolutional-neural-networks-cnns/  
+* Data Magic (by Sunny Kusawa). "Emotion Detection using CNN | Emotion Detection Deep Learning project |Machine Learning | Data Magic." YouTube, http://www.youtube.com/watch?v=UHdrxHPRBng.
+* freeCodeCamp.org. "Deep Learning for Computer Vision with Python and TensorFlow – Complete Course." YouTube, https://www.youtube.com/watch?v=IA3WxTTPXqQ.
+* Nicholas Renotte. "Build a Deep Face Detection Model with Python and TensorFlow | Full Course." YouTube, https://www.youtube.com/watch?v=N_W4EYtsa10.
+* "Emotion Detection using Convolutional Neural Networks (CNNs)." GeeksforGeeks, https://www.geeksforgeeks.org/emotion-detection-using-convolutional-neural-networks-cnns/.
+* "Adding a Rescaling Layer (or any Layer for that matter) to a Trained TensorFlow Model." Stack Overflow, https://stackoverflow.com/questions/66214588/adding-a-rescaling-layer-or-any-layer-for-that-matter-to-a-trained-tensorflow.
+* [Keras API Documentation](https://keras.io/api/)
+* [Tensorflow API Documentantation](https://www.tensorflow.org/api_docs/python/tf)
